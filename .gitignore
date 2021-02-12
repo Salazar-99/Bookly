@@ -1,2 +1,6 @@
 venv/
 notes.txt
+__pycache__/
+Bookly.egg-info/
+testing.ipynb
+.env
