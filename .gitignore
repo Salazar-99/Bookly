@@ -4,3 +4,4 @@ __pycache__/
 Bookly.egg-info/
 testing.ipynb
 .env
+test.txt
