@@ -5,8 +5,6 @@ from prompt_toolkit.history import FileHistory
 from models import Post
 from db import *
 from utils import *
-from errors import DuplicatePostError
-from pymongo.errors import DuplicateKeyError
 
 configure_and_connect()
 
