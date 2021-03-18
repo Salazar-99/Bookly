@@ -1,10 +1,11 @@
 import click
 import click_repl
 import os
+import sys
 from prompt_toolkit.history import FileHistory
-from models import Post
-from db import *
-from utils import *
+from .models import Post
+from .db import *
+from .utils import *
 
 configure_and_connect()
 
@@ -51,6 +52,9 @@ def get_post_by_title(title):
 @cli.command()
 @click.option('--file')
 def upload_post(file):
+    """
+    Upload post from a text file
+    """
     click.echo("Parsing post file...")
     try:
         title, tags, content = get_post_from_file(file)
@@ -62,11 +66,14 @@ def upload_post(file):
         post.save()
         click.echo("Post successfully uploaded!")
     else:
-        print(f"Post with title '{title}' already exists")
+        print(f"Post with title '{title}' already exists. Upload aborted.")
     
 @cli.command()
 @click.option('--title')
 def delete_post(title):
+    """
+    Delete post specified via post title
+    """
     click.echo("Looking for post...")
     try:
         post = Post.objects(title=title)
@@ -78,3 +85,10 @@ def delete_post(title):
     except:
         print(f"Failed to delete post with title: {title}")
     click.echo("Post successfully deleted!")
+
+@cli.command()
+def end():
+    """
+    Exit the Bookly shell
+    """
+    click_repl.exit()

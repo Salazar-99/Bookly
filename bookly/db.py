@@ -11,6 +11,3 @@ def configure_and_connect(config_path: str = '.') -> None:
     """
     host = os.environ.get('MONGO_URI')
     connect(host=host)
-
-
-    
