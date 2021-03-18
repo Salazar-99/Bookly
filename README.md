@@ -5,6 +5,18 @@ and interfaces with a MongoDB database hosted on Mongo Atlas via the `mongoengin
 It currently supports viewing all posts, viewing a post by title, uploading a new post,
 and deleting a post. I have required that blog post titles be unique to prevent accidental double-posting.
 
+For uploading posts, Bookly expects a txt file of the form
+
+```
+Title: A Title
+Tags: tag1, tag2, ...
+Content: Multiple lines of content. Multiple lines of content. Multiple lines of content.
+Multiple lines of content. Multiple lines of content. Multiple lines of content.
+Multiple lines of content. 
+```
+The actual name of each section doesn't matter as long as the colon seperates the content and the name of the section.
+
+
 I plan to add functionality for updating a post, a `rich` dashboard for viewing stats about the blog, and restructuring the project in such a way so that it can be uploaded to PyPI and others can use it to manage their own MongoDB-hosted blogs. 
 
 Currently, Bookly relies on a `.env` file containing a `MONGO_URI` connection string to 
