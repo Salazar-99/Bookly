@@ -5,3 +5,5 @@ Bookly.egg-info/
 testing.ipynb
 .env
 test.txt
+build/
+dist/
