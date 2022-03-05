@@ -1,0 +1,2 @@
+This directory contais AWS CloudFormation templates for creating the resources necessary to run Bookly.
+This includes an S3 Bucket, a User, and an Access Policy for the User to have access to the S3 Bucket

@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  This template implements an IAM user 'Bookly'
+  An S3 bucket for posts to be managed by Bookly CLI
+  And permissions appropriate for the Bookly user to access this bucket
+Resources:
+  bookly:
+    Type:  AWS::S3::Bucket
+  Bookly:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: Bookly
+      ManagedPolicyArns:
+        - !Ref policy
+  booklycredentials:
+    Type: AWS::IAM::AccessKey
+    DependsOn: Bookly
+    Properties: 
+      UserName: Bookly
+  policy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties: 
+      Description: Allow access to bookly bucket and its contents
+      ManagedPolicyName: AllowS3Bookly
+      PolicyDocument: 
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action: 's3:*'
+            Resource: [ !GetAtt bookly.Arn, !Join ['', [!GetAtt bookly.Arn, '/*']]]
+Outputs:
+  booklybucketname:
+    Description: Bucket name for bookly bucket
+    Value: !Ref bookly
+  booklyaccesskeyid:
+    Description: Access Key Id for Bookly User
+    Value: !Ref booklycredentials
+  booklysecret:
+    Description: Secret Access Key for Bookly User
+    Value: !GetAtt booklycredentials.SecretAccessKey
